@@ -37,13 +37,13 @@ export default {
     async fetchMovies() {
       return axios({
         method: 'get',
-        url: 'http://localhost:8081/movies',
+        url: '/movies',
       })
-        .then((response) => {
-          this.movies = response.data.movies;
-        })
-        .catch(() => {
-        });
+      .then((response) => {
+        this.movies = response.data.movies;
+      })
+      .catch(() => {
+      });
     },
   },
 };
