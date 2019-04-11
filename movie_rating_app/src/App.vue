@@ -22,6 +22,14 @@
             <v-list-tile-content class="red--text">Contact</v-list-tile-content>
           </v-list-tile>
         </router-link>
+        <router-link v-bind:to="{ name: 'AddMovie' }" class="side_bar_link">
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon>add</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content class="red--text">Add a movie</v-list-tile-content>
+          </v-list-tile>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="#A21111" dark fixed app>
