@@ -27,6 +27,10 @@ module.exports.getUserByEmail = (email, callback) => {
     User.findOne(query, callback);
 };
 
+module.exports.getAllUsers = (callback) => {
+    User.find({}, 'name email', callback);
+}
+
 module.exports.comparePassword = (candidatePassword, hash, callback) => {
     bcryptjs.compare(candidatePassword, hash, (err, isMatch) => {
         if (err) throw err;

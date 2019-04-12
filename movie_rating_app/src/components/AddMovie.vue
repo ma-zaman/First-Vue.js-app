@@ -38,6 +38,8 @@
 <script>
 import axios from 'axios';
 
+axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + 8081;
+
 export default {
   data: () => ({
     valid: true,
@@ -80,27 +82,27 @@ export default {
             'Content-Type': 'application/json',
           },
         })
-        .then(() => {
-          this.$swal(
-            'Great!',
-            'Movie added successfully!',
-            'success',
-          );
-          this.$router.push({ name: 'Home' });
-          this.$refs.form.reset();
-        })
-        .catch(() => {
-          this.$swal(
-            'Oh oo!',
-            'Could not add the movie!',
-            'error',
-          );
-        });
+          .then(() => {
+            this.$swal(
+              'Great!',
+              'Movie added successfully!',
+              'success',
+            );
+            this.$router.push({ name: 'Home' });
+            this.$refs.form.reset();
+          })
+          .catch(() => {
+            this.$swal(
+              'Oh oo!',
+              'Could not add the movie!',
+              'error',
+            );
+          });
       }
-    return true;
+      return true;
     },
     clear() {
-    this.$refs.form.reset();
+      this.$refs.form.reset();
     },
   },
 };

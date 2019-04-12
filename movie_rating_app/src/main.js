@@ -6,6 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import BootstrapVue from 'bootstrap-vue';
 
+import axios from 'axios';
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueSwal from 'vue-swal';
@@ -15,6 +16,7 @@ import router from './router';
 Vue.use(BootstrapVue);
 Vue.use(Vuetify);
 Vue.use(VueSwal);
+axios.defaults.port = 8081;
 
 Vue.config.productionTip = false;
 

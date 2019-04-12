@@ -54,6 +54,8 @@ import axios from 'axios';
 import './assets/stylesheets/main.css';
 import bus from './bus';
 
+axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + 8081;
+
 export default {
   data: () => ({
     drawer: null,
@@ -75,7 +77,7 @@ export default {
     async fetchUser() {
       return axios({
         method: 'get',
-        url: '/api/current_user',
+        url: 'http://localhost:8081/api/current_user',
       })
       .then((response) => {
         this.current_user = response.data.current_user;

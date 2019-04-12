@@ -6,6 +6,7 @@ import AddMovie from '@/components/AddMovie';
 import Movie from '@/components/Movie';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
+import Users from '@/components/Users';
 
 Vue.use(Router);
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/users/login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users,
     },
   ],
 });

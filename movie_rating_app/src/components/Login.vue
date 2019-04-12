@@ -29,6 +29,9 @@
 <script>
 import axios from 'axios';
 import bus from './../bus';
+
+axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + 8081;
+
 export default {
   data: () => ({
     show1: false,

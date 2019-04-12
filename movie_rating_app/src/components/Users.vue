@@ -1,19 +1,20 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs4 v-for="movie in movies" :key="movie._id">
-      <v-card>
+    <v-flex xs4 v-for="user in users" :key="user._id">
+      <v-card elevation="10">
         <v-card-title primary-title>
-          <div>
-            <div class="headline">
-              <v-btn flat v-bind:to="`/movies/${movie._id}`">
-                {{ movie.name }}
-              </v-btn>
-            </div>
-            <span class="grey--text">{{ movie.release_year }} ‧ {{ movie.genre }}</span>
+          <div class="headline">
+            <v-btn class="orange--text">
+              Bolck user
+            </v-btn>
+            <v-btn class="red--text">
+              Delete user
+            </v-btn>
           </div>
         </v-card-title>
         <v-card-text>
-          {{ movie.description }}
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.email }}</p>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -26,23 +27,23 @@ import axios from 'axios';
 axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + 8081;
 
 export default {
-  name: 'Movies',
+  name: 'Users',
   data() {
     return {
-      movies: [],
+      users: [],
     };
   },
   mounted() {
-    this.fetchMovies();
+    this.fetchUsers();
   },
   methods: {
-    async fetchMovies() {
+    async fetchUsers() {
       return axios({
         method: 'get',
-        url: '/movies',
+        url: '/users/all',
       })
         .then((response) => {
-          this.movies = response.data.movies;
+          this.users = response.data.users;
         })
         .catch(() => {
         });

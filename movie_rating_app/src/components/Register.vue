@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" ref="form" lazy-validation>
-    <v-text-field label="Name" v-model="fullname" :rules="fullnameRules" required ></v-text-field>
+    <v-text-field label="Name" v-model="name" :rules="fullnameRules" required ></v-text-field>
     <v-text-field label="Email" v-model="email" :rules="emailRules" required ></v-text-field>
     <v-text-field
       label="Password"
@@ -33,8 +33,10 @@
 <script>
 import axios from 'axios';
 
+axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + 8081;
+
 export default {
-  data: () => ({
+  data:() => ({
     show1: false,
     rules: {
       required: value => !!value || 'Password is required.',
@@ -42,66 +44,66 @@ export default {
     },
     e1: false,
     valid: true,
-    fullname: '',
+    name: '',
     email: '',
     password: '',
     confirm_password: '',
-    fullnameRules: [
-      (v) => !!v || 'Fullname is required'
+    nameRules: [
+      (v) => !!v || 'Name is required'
     ],
     emailRules: [
       (v) => !!v || 'E-mail is required',
       (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v)
       || 'E-mail must be valid'
-    ]
+    ],
   }),
   methods: {
 
-    async submit () {
+    async submit() {
       if (this.$refs.form.validate()) {
         return axios({
           method: 'post',
           data: {
-            fullname: this.fullname,
+            name: this.name,
             email: this.email,
             password: this.password,
-            confirm_password: this.confirm_password
+            confirm_password: this.confirm_password,
           },
           url: '/users/register',
           headers: {
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         })
-        .then((response) => {
-          this.$swal(
-          'Great!',
-          `You have been successfully registered!`,
-          'success'
-          )
-          this.$router.push({ name: 'Home' })
-        })
-        .catch((error) => {
-          const message = error.response.data.message;
-          this.$swal("Oh oo!", `${message}`, "error")
-        });
+          .then((response) => {
+            this.$swal(
+              'Great!',
+              'You have been successfully registered!',
+              'success',
+            )
+            this.$router.push({ name: 'Home' });
+          })
+          .catch((error) => {
+            const message = error.response.data.message;
+            this.$swal('Oh oo!', `${message}`, 'error');
+          })
       }
     },
-    clear () {
-      this.$refs.form.reset()
+    clear() {
+      this.$refs.form.reset();
     },
-
-    test () {
+    test() {
       if (this.password === this.confirm_password) {
-        submit();
+        this.submit();
       } else {
         this.$swal(
           'Oups!',
-          `Password problem !`,
-          'error'
-        )
-        this.confirm_password= '';
+          'Password problem !',
+          'error',
+        );
+        this.$refs.form.reset();
+        this.$router.push({ name: 'Register' });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

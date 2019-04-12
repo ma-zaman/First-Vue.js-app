@@ -22,6 +22,8 @@ import axios from 'axios';
 import Vue from 'vue';
 import StarRating from 'vue-star-rating';
 
+axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + 8081;
+
 const wrapper = document.createElement('div');
 
 // shared state

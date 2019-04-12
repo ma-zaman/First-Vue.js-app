@@ -22,6 +22,25 @@ module.exports.controller = (app) => {
         });
     }));
 
+    app.get('/users/all', (req, res) => {
+        User.find({}, 'name email', (error, users) => {
+            if (error) { console.log(error); }
+            res.json({
+                users
+            });
+        });
+    });
+
+    app.get('/users/deleteall', (req, res) => {
+        User.deleteMany({}, (error,
+        users) => {
+            if (error) { console.log(error); }
+            res.send({
+                users,
+            });
+        });
+    });
+
     // user login
     app.post('/users/login',
     passport.authenticate('local', { failureRedirect: '/users/login' }),
